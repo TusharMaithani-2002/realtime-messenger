@@ -4,8 +4,10 @@ import useRoutes from "@/app/hooks/useRoutes";
 import { useState } from "react";
 import DesktopItem from "./DesktopItem";
 
-function DesktopSideBar() {
+function DesktopSideBar({currentUser}) {
   const routes = useRoutes();
+
+  console.log(currentUser)
 
   const [isOpen, setIsOpen] = useState(false);
 

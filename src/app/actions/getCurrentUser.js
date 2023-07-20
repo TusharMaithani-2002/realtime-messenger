@@ -1,10 +1,14 @@
-import prisma from '@/app/libs/prismadb';
+import prisma from '../libs/prismadb';
 
 import getSession from './getSession';
 
 const getCurrentUser = async () => {
+
     try {
-        const session = getSession();
+        const session = await getSession();
+
+
+        // we are not returning error as it's not api endpoint
 
         if(!session?.user?.email) {
             console.error("session not found");
@@ -29,3 +33,5 @@ const getCurrentUser = async () => {
         return null;
     }
 }
+
+export default getCurrentUser;
