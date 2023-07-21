@@ -4,7 +4,6 @@ import Image from "next/image";
 
 function Avatar({user}) {
 
-    console.log(user)
   return (
     <div className="relative">
         <div className="inline-block
