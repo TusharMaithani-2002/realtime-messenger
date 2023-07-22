@@ -12,12 +12,14 @@ import Avatar from "@/app/components/Avatar";
 const ConversationBox = ({ data, selected }) => {
   const otherUser = useOtherUser(data);
   const session = useSession();
-  const router = useRoutes();
+  const router = useRouter();
 
 
   const handleClick = useCallback(() => {
+    
     router.push(`/conversations/${data.id}`);
-  }, [data.id, router]);
+   
+  },[data.id,router]);
 
   const lastMessage = useMemo(() => {
     const messages = data.messages || [];
@@ -58,7 +60,7 @@ const ConversationBox = ({ data, selected }) => {
     transition
     cursor-pointer
     p-3
-  `,selected ? 'bg-neutral-100' : 'bg-white')} onClick={()=>handleClick}>
+  `,selected ? 'bg-neutral-100' : 'bg-white')} onClick={handleClick}>
     <Avatar user={otherUser}/>
     <div className="min-w-0 flex-1">
       <div className="focus:outline-none">
