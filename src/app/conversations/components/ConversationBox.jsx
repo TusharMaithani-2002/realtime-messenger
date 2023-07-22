@@ -58,7 +58,7 @@ const ConversationBox = ({ data, selected }) => {
     transition
     cursor-pointer
     p-3
-  `,selected ? 'bg-neutral-100' : 'bg-white')} onClick={handleClick}>
+  `,selected ? 'bg-neutral-100' : 'bg-white')} onClick={()=>handleClick}>
     <Avatar user={otherUser}/>
     <div className="min-w-0 flex-1">
       <div className="focus:outline-none">
