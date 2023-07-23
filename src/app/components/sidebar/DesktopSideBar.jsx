@@ -4,6 +4,7 @@ import useRoutes from "@/app/hooks/useRoutes";
 import { useState } from "react";
 import Avatar from "../Avatar";
 import DesktopItem from "./DesktopItem";
+import SettingModal from "./SettingModal";
 
 function DesktopSideBar({currentUser}) {
   const routes = useRoutes();
@@ -12,6 +13,12 @@ function DesktopSideBar({currentUser}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
+    <>
+    <SettingModal
+    currentUser={currentUser}
+    isOpen={isOpen}
+    onClose={()=>{setIsOpen(false)}}
+    />
     <div
     className="hidden
     lg:fixed
@@ -65,6 +72,7 @@ function DesktopSideBar({currentUser}) {
 
       </nav>
     </div>
+    </>
   );
 }
 
