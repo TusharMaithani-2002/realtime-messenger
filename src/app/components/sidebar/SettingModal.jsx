@@ -39,7 +39,7 @@ const SettingModal = ({ currentUser, isOpen, onClose }) => {
     setIsLoading(true);
 
     axios
-      .post("/api/settings", data)
+      .post("/api/setting", data)
       .then(() => {
         router.refresh();
 
