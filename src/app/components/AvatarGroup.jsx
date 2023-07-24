@@ -5,7 +5,6 @@ import Image from "next/image";
 const AvatarGroup = ({ users=[] }) => {
   const slicedUsers = users?.slice(0, 3);
 
-  console.log(slicedUsers)
   const positionMap = {
     0: "top-0 left-[12px]",
     1: "bottom-0",
