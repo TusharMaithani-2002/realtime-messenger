@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
+import ImageModal from "./ImageModal";
 
 const MessageBox = ({ isLast, data }) => {
   const session = useSession();
@@ -55,7 +56,7 @@ const MessageBox = ({ isLast, data }) => {
            />
           {data.image ? (
             <Image
-            onClick={()=>setImageModal(true)}
+            onClick={()=>setImageModalOpen(true)}
               src={data.image}
               alt="message image"
               height={288}
