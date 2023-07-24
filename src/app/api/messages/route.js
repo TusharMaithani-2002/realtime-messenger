@@ -55,7 +55,7 @@ export async function POST(request) {
             users:true,
             messages:{
                 include:{
-                    seen:true
+                  seen:true
                 }
             }
         }
