@@ -17,7 +17,7 @@ export async function POST(request) {
             return new NextResponse('Unauthorized',{status:401});
         }
 
-        if(isGroup && (!members || !members.length < 2 || !name)) return new NextResponse('Invalid data',{status:400});
+        if(isGroup && (!members || members.length < 2 || !name)) return new NextResponse('Invalid data',{status:400});
 
         if(isGroup) {
             const newConversation = await prisma.conversation.create({

@@ -5,21 +5,18 @@ import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import useOtherUser from "@/app/hooks/useOtherUser";
-import useRoutes from "@/app/hooks/useRoutes";
 import clsx from "clsx";
 import Avatar from "@/app/components/Avatar";
+import AvatarGroup from "@/app/components/AvatarGroup";
 
 const ConversationBox = ({ data, selected }) => {
   const otherUser = useOtherUser(data);
   const session = useSession();
   const router = useRouter();
 
-
   const handleClick = useCallback(() => {
-    
     router.push(`/conversations/${data.id}`);
-   
-  },[data.id,router]);
+  }, [data.id, router]);
 
   const lastMessage = useMemo(() => {
     const messages = data.messages || [];
@@ -32,25 +29,27 @@ const ConversationBox = ({ data, selected }) => {
   }, [session?.data?.user?.email]);
 
   const hasSeen = useMemo(() => {
-    if(!lastMessage) return false;
+    if (!lastMessage) return false;
 
     const seenArray = lastMessage.seen || [];
 
-    if(!userEmail) return false;
+    if (!userEmail) return false;
 
-    return seenArray.filter((user)=> user.email === userEmail).length !== 0;
-  },[userEmail,lastMessage]);
+    return seenArray.filter((user) => user.email === userEmail).length !== 0;
+  }, [userEmail, lastMessage]);
 
   const lastMessageText = useMemo(() => {
-    if(lastMessage?.image) return 'Sent an image';
+    if (lastMessage?.image) return "Sent an image";
 
-    if(lastMessage?.body) return lastMessage.body;
+    if (lastMessage?.body) return lastMessage.body;
 
     return "Started a conversation";
+  }, [lastMessage]);
 
-  },[lastMessage]);
-
-  return <div className={clsx(`
+  return (
+    <div
+      className={clsx(
+        `
     w-full
     flex relative
     items-center
@@ -60,27 +59,44 @@ const ConversationBox = ({ data, selected }) => {
     transition
     cursor-pointer
     p-3
-  `,selected ? 'bg-neutral-100' : 'bg-white')} onClick={handleClick}>
-    <Avatar user={otherUser}/>
-    <div className="min-w-0 flex-1">
-      <div className="focus:outline-none">
-        <div className="flex justify-between items-center mb-1">
-          {/*data.name is group name if its null then its personal chat */}
-          <p className="text-md font-md text-gray-900">{data.name || otherUser.name}</p>
-          {lastMessage?.createdAt && (
-            <p className="
-            text-xs text-gray-400 font-light
-            ">
-              {format(new Date(lastMessage.createdAt),'p')}
+  `,
+        selected ? "bg-neutral-100" : "bg-white"
+      )}
+      onClick={handleClick}
+    >
+      {data.isGroup ? <AvatarGroup users={data.users} /> : <Avatar user={otherUser} />}
+
+      <div className="min-w-0 flex-1">
+        <div className="focus:outline-none">
+          <div className="flex justify-between items-center mb-1">
+            {/*data.name is group name if its null then its personal chat */}
+            <p className="text-md font-md text-gray-900">
+              {data.name || otherUser.name}
             </p>
-          )}
-        </div>
-        <p className={clsx(`
+            {lastMessage?.createdAt && (
+              <p
+                className="
+            text-xs text-gray-400 font-light
+            "
+              >
+                {format(new Date(lastMessage.createdAt), "p")}
+              </p>
+            )}
+          </div>
+          <p
+            className={clsx(
+              `
         truncate text-sm
-        `,hasSeen ? 'text-gray-500' : 'text-black font-medium')}>{lastMessageText}</p>
+        `,
+              hasSeen ? "text-gray-500" : "text-black font-medium"
+            )}
+          >
+            {lastMessageText}
+          </p>
+        </div>
       </div>
     </div>
-  </div>;
+  );
 };
 
 export default ConversationBox;
