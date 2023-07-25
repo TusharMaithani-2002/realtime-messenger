@@ -42,8 +42,8 @@ const Header = ({ conversation }) => {
             className="
             lg:hidden
             block
-            text-sky-500
-            hover:text-sky-600
+            text-purple-600
+            hover:text-purple-700
             transition
             cursor-pointer
             "
@@ -65,9 +65,9 @@ const Header = ({ conversation }) => {
             size={32}
             onClick={() => setDrawerOpen(true)}
             className="
-            text-sky-500
+            text-purple-600
             cursor-pointer
-            hover:text-sky-600
+            hover:text-purple-600
             transition
             "
           />
