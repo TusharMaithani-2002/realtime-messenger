@@ -7,3 +7,5 @@ const useActiveList = create((set) => ({
     set: (ids) => set({ members: ids })
 }));
 
+
+export default useActiveList;

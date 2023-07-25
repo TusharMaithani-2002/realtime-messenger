@@ -9,7 +9,6 @@ export async function POST(request) {
     const body = await request.json();
 
     const { message, image, conversationId } = body;
-    console.log(currentUser)
     if (!currentUser?.id || !currentUser?.email)
       return new NextResponse("Unathaurized", { status: 401 });
 

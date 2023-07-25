@@ -1,5 +1,3 @@
-import { NextApiRequest,NextApiResponse } from "next";
-
 import { getServerSession } from "next-auth";
 
 import { pusherServer } from "@/app/libs/pusher";
@@ -22,7 +20,7 @@ export default async function hanlder(
         user_id : session.user.email
     };
 
-    const authResponse = pusherServer.authorizeChannel(socketId);
+    const authResponse = pusherServer.authorizeChannel(socketId,channel,data);
 
     return response.send(authResponse);
 

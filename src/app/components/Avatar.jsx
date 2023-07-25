@@ -1,9 +1,14 @@
 'use client';
 
 import Image from "next/image";
+import useActiveList from "../hooks/useActiveList";
 
 function Avatar({user}) {
 
+  const {members} = useActiveList();
+
+
+  const isActive = members.indexOf(user?.email) !== -1;
   return (
     <div className="relative">
         <div className="inline-block
@@ -21,7 +26,7 @@ function Avatar({user}) {
              fill 
             /> 
         </div>
-        <span 
+        {isActive && (<span 
           className="
             absolute 
             block 
@@ -36,7 +41,8 @@ function Avatar({user}) {
             md:h-3 
             md:w-3
           " 
-        />
+        />)}
+        
     </div>
   )
 }

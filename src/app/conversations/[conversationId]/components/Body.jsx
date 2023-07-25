@@ -58,7 +58,6 @@ const Body = ({ initialMessages }) => {
   return (
     // flex-1 makes body take entire space left after form component
     <div className="flex-1 overflow-y-auto">
-        { console.log(messages)}
       {messages && messages.map((message, i) => (
         <MessageBox
           key={message.id}
